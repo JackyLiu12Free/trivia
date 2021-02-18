@@ -7,7 +7,10 @@ function App() {
   return (
     <div className="app">
       Trivia!
-      <Question text={data[questionNumber].question.text} />
+      <Question
+        choices={data[questionNumber].question.choices}
+        text={data[questionNumber].question.text}
+      />
       <NextQuestion />
     </div>
   );
@@ -15,17 +18,26 @@ function App() {
 
 // var questionNumber = 0;
 
-function Question({ text }) {
+// let x = [1,2,3,4]
+// console.log(x.map((element) => {
+//   return element * 2
+// }))
+
+function Question({ text, choices }) {
+  var answerChoices = choices.map((choice) => {
+    return <Answer text={choice} />;
+  });
   return (
     <div className="Question">
       {text}
-      <Answer text={data[questionNumber].question.choices[0]} />
+      {answerChoices}
     </div>
   );
 }
 
 function NextQuestion({ text }) {
   return (
+    
     <div className="NextQuestion">
       {" "}
       <button>Next Question</button>{" "}
