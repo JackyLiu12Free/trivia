@@ -4,40 +4,43 @@ import data from "../sample_data.json";
 
 function App() {
   var questionNumber = 0;
+  let [isAnswered, setIsAnswered] = useState(false);
+
+  let correctAnswer = "";
+  if (isAnswered === true) {
+    correctAnswer =
+      data[questionNumber].question.choices[
+        data[questionNumber].question.correct_choice_index
+      ];
+  }
+
   return (
     <div className="app">
       Trivia!
       <Question
-        choices={data[questionNumber].question.choices}
         text={data[questionNumber].question.text}
+        choices={data[questionNumber].question.choices}
       />
+      <button onClick={() => setIsAnswered(true)}> Answer Question </button>
+      <div>{correctAnswer}</div>
       <NextQuestion />
     </div>
   );
 }
 
-// var questionNumber = 0;
-
-// let x = [1,2,3,4]
-// console.log(x.map((element) => {
-//   return element * 2
-// }))
-
 function Question({ text, choices }) {
-  var answerChoices = choices.map((choice) => {
-    return <Answer text={choice} />;
-  });
   return (
     <div className="Question">
       {text}
-      {answerChoices}
+      {choices.map((element) => {
+        return <Answer text={element} />;
+      })}
     </div>
   );
 }
 
 function NextQuestion({ text }) {
   return (
-    
     <div className="NextQuestion">
       {" "}
       <button>Next Question</button>{" "}
