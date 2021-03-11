@@ -3,8 +3,17 @@ import "../css/App.css";
 import data from "../sample_data.json";
 
 function App() {
-  var questionNumber = 0;
+  // var questionNumber = 0;
   let [isAnswered, setIsAnswered] = useState(false);
+  let [questionNumber, setQuestionNumber ] = useState(0);
+  let [Answer, setAnswer] = useState();
+
+
+
+  if (Answer = ) {
+
+  }
+
 
   let correctAnswer = "";
   if (isAnswered === true) {
@@ -22,8 +31,8 @@ function App() {
         choices={data[questionNumber].question.choices}
       />
       <button onClick={() => setIsAnswered(true)}> Answer Question </button>
-      <div>{correctAnswer}</div>
-      <NextQuestion />
+      <div><p>Answer: {correctAnswer}</p></div>
+      <NextQuestion setIsAnswered= {setIsAnswered} incrementQuestionNumber ={() => setQuestionNumber(questionNumber + 1)} /> 
     </div>
   );
 }
@@ -39,11 +48,14 @@ function Question({ text, choices }) {
   );
 }
 
-function NextQuestion({ text }) {
+function NextQuestion({ incrementQuestionNumber, setIsAnswered, text }) {
   return (
     <div className="NextQuestion">
       {" "}
-      <button>Next Question</button>{" "}
+      <button onClick={() => {
+        incrementQuestionNumber()
+        setIsAnswered(false)
+        } }>Next Question</button>{" "}
     </div>
   );
 }
